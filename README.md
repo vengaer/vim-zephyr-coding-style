@@ -24,8 +24,8 @@ you can use the :ZephyrCodingStyle command.
 
 ## License
 
-Copyright (c) 2012-2026 Vivien Didelot. 
-Copyright (c) 2026 Vilhelm Engström.
+Copyright (c) 2012-2026 Vivien Didelot.   
+Copyright (c) 2026 Vilhelm Engström.  
 
 Distributed under the same terms as Vim itself. 
 See :help license.
