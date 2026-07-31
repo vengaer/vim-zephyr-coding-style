@@ -78,6 +78,7 @@ function s:ZephyrHighlighting()
 
     if index(["c", "h", "cpp"], &filetype) >= 0
         syn match ZephyrError /\/\/.*/
+        syn match ZephyrError /\v0(b|B)[^;]*/
     endif
 
     " Highlight trailing whitespace, unless we're in insert mode and the
