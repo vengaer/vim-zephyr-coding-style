@@ -10,6 +10,11 @@
 " options will be applied only if "/zephyr/" or "/kernel" is in buffer's path.
 "
 "   let g:zephyrsty_patterns = [ "/zephyr/", "/kernel/" ]
+"
+" By default, the plugin enables cindent for relevant files. This can be
+" disabled by setting the g:zephyrsty_nocindent variable to 0 in your vimrc
+"
+"   let g:zephyrsty_cindent = 0
 
 if exists("g:loaded_zephyrsty")
     finish
@@ -61,7 +66,9 @@ function s:ZephyrFormatting()
     setlocal textwidth=100
     setlocal noexpandtab
 
-    setlocal cindent
+    if !exists("g:zephyrsty_cindent") || g:zephyrsty_cindent
+        setlocal cindent
+    endif
     setlocal cinoptions=:0,l1,t0,g0,(0
 endfunction
 
