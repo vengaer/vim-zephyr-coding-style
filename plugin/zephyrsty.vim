@@ -76,6 +76,10 @@ function s:ZephyrHighlighting()
     syn match ZephyrError / \+\ze\t/     " spaces before tab
     syn match ZephyrError /\%>100v[^()\{\}\[\]<>]\+/ " virtual column 101 and more
 
+    if index(["c", "h", "cpp"], &filetype) >= 0
+        syn match ZephyrError /\/\/.*/
+    endif
+
     " Highlight trailing whitespace, unless we're in insert mode and the
     " cursor's placed right after the whitespace. This prevents us from having
     " to put up with whitespace being highlighted in the middle of typing
