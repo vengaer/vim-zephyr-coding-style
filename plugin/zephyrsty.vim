@@ -90,11 +90,11 @@ function s:ZephyrHighlighting()
     syn match ZephyrError /\%>100v[^()\{\}\[\]<>]\+/ " virtual column 101 and more
 
     if index(["c", "h", "cpp"], &filetype) >= 0
-        syn match ZephyrError /\v0(b|B)[^;]*/
+        syn match ZephyrError /\v0(b|B)[^;]*/  " Binary literals
     endif
 
     if index(["c", "h", "cpp", "dts", "asm"], &filetype) >= 0
-        syn match ZephyrError /\/\/.*/
+        syn match ZephyrError /\/\/.*/  " C++/C99-style single-line comments
     endif
 
     " Highlight trailing whitespace, unless we're in insert mode and the
