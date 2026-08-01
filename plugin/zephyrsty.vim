@@ -29,7 +29,7 @@ let g:loaded_zephyrsty = 1
 augroup zephyrsty
     autocmd!
 
-    autocmd FileType c,cpp,dts call s:ZephyrConfigure()
+    autocmd FileType c,cpp,dts,asm call s:ZephyrConfigure()
     autocmd FileType diff setlocal ts=8
     autocmd FileType rst setlocal ts=8 sw=8 sts=8 noet
     autocmd FileType kconfig setlocal ts=8 sw=8 sts=8 noet
