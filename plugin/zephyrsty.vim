@@ -29,11 +29,10 @@ let g:loaded_zephyrsty = 1
 augroup zephyrsty
     autocmd!
 
-    autocmd FileType c,cpp call s:ZephyrConfigure()
+    autocmd FileType c,cpp,dts call s:ZephyrConfigure()
     autocmd FileType diff setlocal ts=8
     autocmd FileType rst setlocal ts=8 sw=8 sts=8 noet
     autocmd FileType kconfig setlocal ts=8 sw=8 sts=8 noet
-    autocmd FileType dts setlocal ts=8 sw=8 sts=8 noet
 augroup END
 
 function s:ZephyrConfigure()
@@ -60,7 +59,9 @@ command! ZephyrCodingStyle call s:ZephyrCodingStyle()
 
 function! s:ZephyrCodingStyle()
     call s:ZephyrFormatting()
-    call s:ZephyrKeywords()
+    if index(["c", "cpp", "h"], &filetype) >= 0
+        call s:ZephyrKeywords()
+    endif
     call s:ZephyrHighlighting()
 endfunction
 
@@ -92,7 +93,7 @@ function s:ZephyrHighlighting()
         syn match ZephyrError /\v0(b|B)[^;]*/
     endif
 
-    if index(["c", "h", "cpp", "dts"], &filetype) >= 0
+    if index(["c", "h", "cpp", "dts", "asm"], &filetype) >= 0
         syn match ZephyrError /\/\/.*/
     endif
 
@@ -115,7 +116,7 @@ function ZephyrCopyright()
 
     let l:comment = v:null
 
-    if index(["c", "h", "cpp", "dts"], &filetype) >= 0
+    if index(["c", "h", "cpp", "dts", "asm"], &filetype) >= 0
         let l:comment = ["/*", " * " .. l:notice, " *", " * " .. l:license, " */"]
     elseif index(["kconfig", "cmake"], &filetype) >= 0
         let l:comment = ["# " .. l:notice, "#", "# " .. l:license]
