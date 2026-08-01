@@ -15,6 +15,11 @@
 " disabled by setting the g:zephyrsty_nocindent variable to 0 in your vimrc
 "
 "   let g:zephyrsty_cindent = 0
+"
+" Use the ZephyrCopyright function to insert a Zephyr-compatible copyright
+" notice at the top of the file. The copyright holder may be configured by
+" setting the g:zephyrsty_copyright_holder variable in your vimrc. If the
+" variable is unset, the user.name value from your git configuration is used.
 
 if exists("g:loaded_zephyrsty")
     finish
@@ -97,4 +102,34 @@ function s:ZephyrHighlighting()
     " something
     autocmd InsertEnter * match ZephyrError /\s\+\%#\@<!$/
     autocmd InsertLeave * match ZephyrError /\s\+$/
+endfunction
+
+function ZephyrCopyright()
+    let l:cursorpos = winsaveview()
+
+    if !exists("g:zephyrsty_copyright_holder")
+        let g:zephyrsty_copyright_holder = trim(system("git config get user.name"))
+    endif
+    let l:notice = "Copyright (c) " ..  strftime("%Y") .. " " ..  g:zephyrsty_copyright_holder
+    let l:license = "SPDX-License-Identifier: Apache-2.0"
+
+    let l:comment = v:null
+
+    if index(["c", "h", "cpp", "dts"], &filetype) >= 0
+        let l:comment = ["/*", " * " .. l:notice, " *", " * " .. l:license, " */"]
+    elseif index(["kconfig", "cmake"], &filetype) >= 0
+        let l:comment = ["# " .. l:notice, "#", "# " .. l:license]
+    else
+        echon "\r\r"
+        echohl ErrorMsg
+        echon "Unknown filetype " .. &filetype
+        echohl None
+    endif
+
+    if l:comment isnot v:null
+        call append('^', l:comment)
+        echon "\r\r" .. "Copyright notice for " .. g:zephyrsty_copyright_holder  .. " added"
+    endif
+
+    call winrestview(l:cursorpos)
 endfunction

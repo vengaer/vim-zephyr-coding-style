@@ -22,6 +22,11 @@ few directories can be done by setting the `g:zephyrsty_patterns` array in your 
 If you want to enable the coding style on demand without checking the filetype, 
 you can use the :ZephyrCodingStyle command. 
 
+Call the ZephyrCopyright function to insert a Zephyr-style copyright notice at the
+top of the current file. This can, obviously, be mapped to a mapping via e.g.
+
+    nnoremap <Leader>c :call ZephyrCopyright()<CR>
+
 ## License
 
 Copyright (c) 2012-2026 Vivien Didelot.   
