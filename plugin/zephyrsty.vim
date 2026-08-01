@@ -84,8 +84,11 @@ function s:ZephyrHighlighting()
     syn match ZephyrError /\%>100v[^()\{\}\[\]<>]\+/ " virtual column 101 and more
 
     if index(["c", "h", "cpp"], &filetype) >= 0
-        syn match ZephyrError /\/\/.*/
         syn match ZephyrError /\v0(b|B)[^;]*/
+    endif
+
+    if index(["c", "h", "cpp", "dts"], &filetype) >= 0
+        syn match ZephyrError /\/\/.*/
     endif
 
     " Highlight trailing whitespace, unless we're in insert mode and the
