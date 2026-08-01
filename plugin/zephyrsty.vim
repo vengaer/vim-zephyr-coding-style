@@ -118,7 +118,7 @@ function ZephyrCopyright()
 
     if index(["c", "h", "cpp", "dts", "asm"], &filetype) >= 0
         let l:comment = ["/*", " * " .. l:notice, " *", " * " .. l:license, " */"]
-    elseif index(["kconfig", "cmake"], &filetype) >= 0
+    elseif index(["kconfig", "cmake", "yaml"], &filetype) >= 0
         let l:comment = ["# " .. l:notice, "#", "# " .. l:license]
     else
         echon "\r\r"
