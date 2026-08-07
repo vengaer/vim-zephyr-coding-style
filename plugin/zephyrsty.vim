@@ -90,7 +90,7 @@ function s:ZephyrHighlighting()
     syn match ZephyrError /\%>100v[^()\{\}\[\]<>]\+/ " virtual column 101 and more
 
     if index(["c", "h", "cpp"], &filetype) >= 0
-        syn match ZephyrError /\v0(b|B)[^;]*/  " Binary literals
+        syn match ZephyrError /\v0(b|B)[0-9]+/  " Binary literals
     endif
 
     if index(["c", "h", "cpp", "dts", "asm"], &filetype) >= 0
